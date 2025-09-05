@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HairAtlas - Profile</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <!-- navbar -->
+    <div class="navbar">
+        <div class="logo">Hair<span>Atlas</span></div>
+        <div class="menu">
+            <div class="dropdown">
+                <a href="#">Tools <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('home') }}">Face Shape Analysis</a>
+                    <a href="{{ url_for('profile') }}">Profile</a>
+                    <a href="{{ url_for('history') }}">History</a>
+                    <a href="{{ url_for('favorites') }}">Favorites</a>
+                </div>
+            </div>
+            <a href="{{ url_for('hairstyles') }}" id="hairstylesLink">Hairstyles</a>
+            <a href="#" class="theme-toggle"><i class="fas fa-sun"></i></a>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('logout') }}">Logout <img src="{{ url_for('static', filename='Hairstyle_images/login-symbol.png') }}" width="20px" alt=""></a>
+            {% else %}
+                <a href="{{ url_for('login') }}" id="loginpage">Log In / Sign Up <img src="{{ url_for('static', filename='Hairstyle_images/login-symbol.png') }}" width="20px" alt=""></a>
+            {% endif %}
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="upload-container">
+            <h1>Profile</h1>
+            <form action="{{ url_for('profile') }}" method="POST">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" value="{{ current_user.age if current_user.age else '' }}" placeholder="Enter your age">
+                
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender">
+                    <option value="">Select Gender</option>
+                    <option value="male" {% if current_user.gender == 'male' %}selected{% endif %}>Male</option>
+                    <option value="female" {% if current_user.gender == 'female' %}selected{% endif %}>Female</option>
+                    <option value="other" {% if current_user.gender == 'other' %}selected{% endif %}>Other</option>
+                </select>
+                
+                <label for="hair_type">Hair Type:</label>
+                <select id="hair_type" name="hair_type">
+                    <option value="">Select Hair Type</option>
+                    <option value="straight" {% if current_user.hair_type == 'straight' %}selected{% endif %}>Straight</option>
+                    <option value="wavy" {% if current_user.hair_type == 'wavy' %}selected{% endif %}>Wavy</option>
+                    <option value="curly" {% if current_user.hair_type == 'curly' %}selected{% endif %}>Curly</option>
+                </select>
+                
+                <button type="submit">Update Profile</button>
+            </form>
+        </div>
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

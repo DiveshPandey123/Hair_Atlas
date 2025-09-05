@@ -1,0 +1,129 @@
+/* static/css/hairstyles.css */
+.hairstyles-container {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hairstyles-container h1 {
+    font-size: 36px;
+    color: #ff5e57;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.hairstyles-container p {
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.hairstyles-container p a {
+    color: #ff5e57;
+    text-decoration: none;
+}
+
+.hairstyles-container p a:hover {
+    text-decoration: underline;
+}
+
+.search-container {
+    margin: 20px 0;
+}
+
+.search-container input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+}
+
+.section-title {
+    font-size: 28px;
+    color: #333;
+    margin: 30px 0 20px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.gallery-item {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.gallery-item:hover {
+    transform: scale(1.05);
+}
+
+.gallery-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.gallery-item p {
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+}
+
+footer {
+    background-color: #b8b8c5;
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+footer p {
+    font-size: 14px;
+    color: #333;
+    margin: 5px 0;
+}
+
+.social-icons {
+    margin-top: 10px;
+}
+
+.social-icons a {
+    color: #ff5e57;
+    font-size: 20px;
+    margin: 0 10px;
+    transition: color 0.3s;
+}
+
+.social-icons a:hover {
+    color: #e23b1a;
+}
+
+@media (max-width: 600px) {
+    .hairstyles-container h1 {
+        font-size: 28px;
+    }
+
+    .hairstyles-container p {
+        font-size: 16px;
+    }
+
+    .section-title {
+        font-size: 24px;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+}
