@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HairAtlas - Hairstyles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/hairstyles.css') }}">
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">Hair<span>Atlas</span></div>
+        <div class="menu">
+            <div class="dropdown">
+                <a href="#">Tools <i class="fas fa-chevron-down"></i></a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('home') }}">Face Shape Analysis</a>
+                    <a href="{{ url_for('profile') }}">Profile</a>
+                    <a href="{{ url_for('history') }}">History</a>
+                    <a href="{{ url_for('favorites') }}">Favorites</a>
+                </div>
+            </div>
+            <a href="{{ url_for('hairstyles') }}" id="hairstylesLink">Hairstyles</a>
+            <a href="#" class="theme-toggle"><i class="fas fa-sun"></i></a>
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('logout') }}">Logout <img src="{{ url_for('static', filename='Hairstyle_images/login-symbol.png') }}" width="20px" alt=""></a>
+            {% else %}
+                <a href="{{ url_for('login') }}" id="loginpage">Log In / Sign Up <img src="{{ url_for('static', filename='Hairstyle_images/login-symbol.png') }}" width="20px" alt=""></a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Hairstyles Gallery (from your provided code) -->
+    <div class="hairstyles-container">
+        <h1>Hairstyles for Men and Women</h1>
+        <p>Don't see the style you want to try? We'll add it for you, just <a href="{{ url_for('home') }}">get in touch</a></p>
+        <div class="search-container">
+            <input placeholder="Search" type="text" id="searchInput" onkeyup="searchHairstyles()">
+        </div>
+
+        <div class="section-title">Female Hairstyles</div>
+        <div class="gallery" id="femaleGallery">
+            <div class="gallery-item">
+                <img alt="Bob - disheveled hairstyle for women" src="{{ url_for('static', filename='Hairstyle_images/female hairstyle images/bob-disheveled.jpg') }}"/>
+                <p>Bob - disheveled</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Bob - Short with bangs hairstyle for women" src="{{ url_for('static', filename='Hairstyle_images/female hairstyle images/Bob - Short with bangs.jpg') }}"/>
+                <p>Bob - Short with bangs</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Bridal Style hairstyle for women" src="{{ url_for('static', filename='Hairstyle_images/female hairstyle images/Bridal Style.jpg') }}"/>
+                <p>Bridal Style</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Bun hairstyle for women" src="{{ url_for('static', filename='Hairstyle_images/female hairstyle images/Bun.jpg') }}"/>
+                <p>Bun</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Buzz hairstyle for women" src="{{ url_for('static', filename='Hairstyle_images/female hairstyle images/Buzz.jpg') }}"/>
+                <p>Buzz</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Emo hairstyle for women" src="{{ url_for('static', filename='Hairstyle_images/female hairstyle images/Emo.jpg') }}"/>
+                <p>Emo</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Long Pony Tail hairstyle for women" src="{{ url_for('static', filename='Hairstyle_images/female hairstyle images/Long Pony Tail.jpg') }}"/>
+                <p>Long Pony Tail</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Messy Bun hairstyle for women" src="{{ url_for('static', filename='Hairstyle_images/female hairstyle images/messy Bun.jpg') }}"/>
+                <p>Messy Bun</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Mullet hairstyle for women" src="{{ url_for('static', filename='Hairstyle_images/female hairstyle images/Mullet.jpg') }}"/>
+                <p>Mullet</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Pixie hairstyle for women" src="{{ url_for('static', filename='Hairstyle_images/female hairstyle images/Pixie.jpg') }}"/>
+                <p>Pixie</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Pompadour hairstyle for women" src="{{ url_for('static', filename='Hairstyle_images/female hairstyle images/Pompadour.jpg') }}"/>
+                <p>Pompadour</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Short curly hairstyle for women" src="{{ url_for('static', filename='Hairstyle_images/female hairstyle images/short curly.jpg') }}"/>
+                <p>Short curly</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Slicked back undercut hairstyle for women" src="{{ url_for('static', filename='Hairstyle_images/female hairstyle images/Slicked back undercut.jpg') }}"/>
+                <p>Slicked back undercut</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Undercut hairstyle for women" src="{{ url_for('static', filename='Hairstyle_images/female hairstyle images/Undercut.jpg') }}"/>
+                <p>Undercut</p>
+            </div>
+        </div>
+
+        <div class="section-title">Male Hairstyles</div>
+        <div class="gallery" id="maleGallery">
+            <div class="gallery-item">
+                <img alt="Buzz hairstyle for men" src="{{ url_for('static', filename='Hairstyle_images/male hairStyle images/Buzz Cut.webp') }}"/>
+                <p>Buzz</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Caesar hairstyle for men" src="{{ url_for('static', filename='Hairstyle_images/male hairStyle images/Caesar Haircut.webp') }}"/>
+                <p>Caesar</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Curtain Bangs hairstyle for men" src="{{ url_for('static', filename='Hairstyle_images/male hairStyle images/Curtain Bangs.webp') }}"/>
+                <p>Curtain Bangs</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Faux Hawk hairstyle for men" src="{{ url_for('static', filename='Hairstyle_images/male hairStyle images/Faux Hawk.webp') }}"/>
+                <p>Faux Hawk</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Flow Haircut hairstyle for men" src="{{ url_for('static', filename='Hairstyle_images/male hairStyle images/Flow Haircut.webp') }}"/>
+                <p>Flow Haircut</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="French Crop hairstyle for men" src="{{ url_for('static', filename='Hairstyle_images/male hairStyle images/French Crop.webp') }}"/>
+                <p>French Crop</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Ivy League hairstyle for men" src="{{ url_for('static', filename='Hairstyle_images/male hairStyle images/Ivy League Haircut.webp') }}"/>
+                <p>Ivy League</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Long Top Short Sides hairstyle for men" src="{{ url_for('static', filename='Hairstyle_images/male hairStyle images/Long Top Short Sides.webp') }}"/>
+                <p>Long Top Short Sides</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Man Bob hairstyle for men" src="{{ url_for('static', filename='Hairstyle_images/male hairStyle images/Man Bob.webp') }}"/>
+                <p>Man Bob</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Mullet hairstyle for men" src="{{ url_for('static', filename='Hairstyle_images/male hairStyle images/Mullet Haircut.webp') }}"/>
+                <p>Mullet</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Quiff hairstyle for men" src="{{ url_for('static', filename='Hairstyle_images/male hairStyle images/Quiff.webp') }}"/>
+                <p>Quiff</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Shag hairstyle for men" src="{{ url_for('static', filename='Hairstyle_images/male hairStyle images/Shag Haircut.webp') }}"/>
+                <p>Shag</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Slicked hairstyle for men" src="{{ url_for('static', filename='Hairstyle_images/male hairStyle images/Slicked Back Hair.webp') }}"/>
+                <p>Slicked</p>
+            </div>
+            <div class="gallery-item">
+                <img alt="Undercut hairstyle for men" src="{{ url_for('static', filename='Hairstyle_images/male hairStyle images/Undercut.webp') }}"/>
+                <p>Undercut</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Hair Atlas. All rights reserved.</p>
+        <p>Follow us on social media:</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/" target="_blank" class="fab fa-facebook"></a>
+            <a href="https://www.twitter.com/" target="_blank" class="fab fa-twitter"></a>
+            <a href="https://www.instagram.com/" target="_blank" class="fab fa-instagram"></a>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        function searchHairstyles() {
+            const input = document.getElementById('searchInput').value.toLowerCase();
+            const femaleItems = document.querySelectorAll('#femaleGallery .gallery-item');
+            const maleItems = document.querySelectorAll('#maleGallery .gallery-item');
+
+            // Search female hairstyles
+            femaleItems.forEach(item => {
+                const title = item.querySelector('p').textContent.toLowerCase();
+                if (title.includes(input)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            // Search male hairstyles
+            maleItems.forEach(item => {
+                const title = item.querySelector('p').textContent.toLowerCase();
+                if (title.includes(input)) {
+                    item.style.display = '';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>
