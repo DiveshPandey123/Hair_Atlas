@@ -14,7 +14,7 @@ from preprocess import detect_and_crop_face
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:Divesh_Pandey2121@localhost/users_db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+mysqlconnector://root:Your Sql Password /users_db'
 
 # Initialize extensions
 db = SQLAlchemy(app)
@@ -274,4 +274,5 @@ def hairstyles():
 
 if __name__ == '__main__':
     print("Starting Flask server...")   
+
     app.run(debug=True, host='0.0.0.0', port=5000)
